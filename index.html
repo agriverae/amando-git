@@ -1,40 +1,355 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <section>
+            <h1>Amando a Git</h1>
+          </section>
+          <section>
+            <p>Presentador: Alí Rivera =)</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>¿Qué es un repositorio de Git?</h1>
+          </section>
+          <section>
+            <p>
+              Un repositorio de Git es simplemente una base de datos que
+              contiene toda la información necesaria para retener y manejar las
+              revisiones e historia de un proyecto.
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Conceptos Generales Parte 1</h1>
+          </section>
+          <section>
+            <h2>
+              En el corazón de Git se encuentra la tienda de objetos (Object
+              Store)
+            </h2>
+            <p>
+              Contiene la información original de todos tus archivos, mensajes
+              de log, información del autor, fechas y cualquier otra información
+              necesaria para rearmar cualquier versión o rama de un proyecto
+            </p>
+            <p>Tiene 4 tipos de objetos: Blobs, arboles, commits y tags</p>
+          </section>
+          <section>
+            <h4>Blob</h4>
+            <ul>
+              <li>Binary</li>
+              <li>Large</li>
+              <li>OBject</li>
+            </ul>
+            <p>
+              Es un termino para referirse a un archivo o variable que puede
+              contener cualquier tipo de data y su estructura interior es
+              ignorada por el programa.
+            </p>
+            <p>
+              No contiene ninguna información respecto del archivo. En git cada
+              versión de un archivo es representado como un Blob.
+            </p>
+          </section>
+          <section>
+            <h4>Trees (Arboles)</h4>
+            <p>Representa un nivel de información del directorio.</p>
+            <p>
+              Guarda los identificadores de los blobs, nombre de rutas y un poco
+              de metada respecto de los archivos dentro de un directorio.
+            </p>
+            <p>
+              También puede hacer referencia a otros arboles, creando una
+              jerarquía de arboles.
+            </p>
+          </section>
+          <section>
+            <h4>Commits</h4>
+            <p>
+              Guarda metada de cualquier cambio introducido al repositorio,
+              incluyendo autor, mensaje, etc.
+            </p>
+            <p>
+              Cada commit apunta a un Arbol que captura en una "foto" el estado
+              del repositorio en ese momento dado.
+            </p>
+            <p>El primer commit inicial no tiene padre.</p>
+            <p>En general, los commits tienen al menos un padre.</p>
+          </section>
+          <section>
+            <h4>Tags</h4>
+            <p>
+              Asigna un nombre legible para los humanos a un objecto especifico,
+              usualmente un commit.
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Conceptos Generales Parte 2</h1>
+          </section>
+          <section>
+            <h3>Index</h3>
+            <p>
+              Recuerda y retiene los cambios que se pasaron a "Stage".
+              Manteniendolos a salvo hasta que uno les haga commit
+            </p>
+            <p>
+              El indice permite una transición gradual, usualmente guiado por el
+              desarrollador. Desde un estado complejo del repositorio a otro
+              estado presuntamente mejor
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Conceptos Generales Parte 3</h1>
+          </section>
+          <section>
+            <h3>Nombres Basados en contenido</h3>
+            <p>
+              Cada objeto(blobs, arboles, commits y tags) tiene un nombre unico
+              que se produce al aplicar una encriptación a los contenidos del
+              mismo. Dandonos un valor del tipo SHA1.
+            </p>
+            <p>
+              SHA1 son valores de 160 bits que usualmente se representan con un
+              número hexadecimal de 40 digitos.
+            </p>
+            <p>
+              El mismo contenido en diferentes directorios hasta en otras
+              maquinas dan como resultado el mismo SHA1.
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Conceptos Generales Parte 4</h1>
+          </section>
+          <section>
+            <h3>Git rastrea el contenido</h3>
+            <p>
+              Cuando git guarda un archivo en la tienda de objetos lo hace
+              basado en el valor computado(SHA1) y no el nombre del archivo.
+            </p>
+            <p>
+              Si dos archivos diferentes tienen el mismo tipo de contenido,
+              independientemente de donde esten ubicados. Git guarda una única
+              copia del archivo como un blob dentro de la tienda de objetos
+              indexado por un valor del tipo SHA1
+            </p>
+          </section>
+          <section>
+            <h3>¿Qué sucede cuando un archivo cambia?</h3>
+            <p>
+              Git computa un nuevo identificador del tipo SHA1 y determina que
+              es un nuevo tipo de "Blob" en la tienda de objetos. El "blob"
+              original se mantiene intacto.
+            </p>
+            <p>
+              Git guarda cada version de cada archivo. Dado que git usa un valor
+              computado basado en los contenidos del archivo como nombre del
+              archivo debe operar en cada copia completa del archivo
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Conceptos Generales Parte 5</h1>
+          </section>
+          <section>
+            <h3>Paquete de archivos</h3>
+            <p>
+              Git usa un sistema muy eficiente de guardado. Para crear un
+              paquete de archivos, git primero localiza los archivos cuyo
+              contenido sea muy similar y guarda el contenido completo de uno de
+              ellos
+            </p>
+            <p>Luego calcula las diferencias o deltas y las guarda</p>
+            <p>
+              De esta manera construye los otros archivos usando el archivo que
+              se uso como base y luego le aplica las diferencias o deltas
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Ejemplos de la tienda de objetos</h1>
+          </section>
+          <section data-transition="slide-in fade-out">
+            <div style="display: flex; align-items: center">
+              <img
+                style="width: 60%"
+                src="images/tienda-objetos-basico.png"
+                alt="tienda de objetos basico"
+              />
+              <div style="margin-left: 20px; align-items: center">
+                <p>
+                  Blob: Es el último objeto del fondo(abajo); No hace referencia
+                  a nada y solo es referenciado por arboles. En las imagenes se
+                  distingue por un rectangulo.
+                </p>
+              </div>
+            </div>
+          </section>
+          <section data-transition="slide-in fade-out">
+            <div style="display: flex; align-items: center">
+              <img
+                style="width: 60%"
+                src="images/tienda-objetos-basico.png"
+                alt="tienda de objetos basico"
+              />
+              <div style="margin-left: 20px">
+                <p>
+                  Arboles: Apuntan a blobs y posiblemente a otros arboles
+                  también. Cualquier Arbol puede ser referenciado por uno o más
+                  commits. Cada arbol es representado por un triangulo
+                </p>
+              </div>
+            </div>
+          </section>
+          <section data-transition="slide-in fade-out">
+            <div style="display: flex; align-items: center">
+              <img
+                style="width: 60%"
+                src="images/tienda-objetos-basico.png"
+                alt="tienda de objetos basico"
+              />
+              <div style="margin-left: 20px">
+                <p>
+                  Commit: Es representado por un circulo. Apunta a un arbol en
+                  particular que fue introducido al repositorio por ese mismo
+                  commit
+                </p>
+              </div>
+            </div>
+          </section>
+          <section data-transition="slide-in fade-out">
+            <div style="display: flex; align-items: center">
+              <img
+                style="width: 60%"
+                src="images/tienda-objetos-basico.png"
+                alt="tienda de objetos basico"
+              />
+              <div style="margin-left: 20px">
+                <p>Tag: Es representado por un paralelogramo.</p>
+              </div>
+            </div>
+          </section>
+          <section data-transition="slide-in fade-out">
+            <div style="display: flex; align-items: center">
+              <img
+                style="width: 60%"
+                src="images/tienda-objetos-basico.png"
+                alt="tienda de objetos basico"
+              />
+              <div style="margin-left: 20px">
+                <p>
+                  Branch(Rama): no es un Objeto de git fundamental, pero juega
+                  un rol crucial a la hora de nombrar un commit. Cada
+                  branch(rama) es representado por un rectangulo ovalado
+                </p>
+              </div>
+            </div>
+          </section>
+          <section data-transition="slide-in fade-out">
+            <div style="display: flex; align-items: center">
+              <img
+                style="width: 60%"
+                src="images/tienda-objetos-basico.png"
+                alt="tienda de objetos basico"
+              />
+              <div style="margin-left: 20px">
+                <p>
+                  Como se puede ver en la imagen, se crearon dos archivos dentro
+                  del mismo directorio con este primer commit.
+                </p>
+                <p>
+                  El tag v1.0 y el branch master ambos apuntan al mismo commit
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Ejemplos de la tienda de objetos. Parte 2</h1>
+          </section>
+          <section data-transition="slide-in fade-out">
+            <div style="display: flex; align-items: center">
+              <img
+                style="width: 50%"
+                src="images/tienda-objetos-basico2.png"
+                alt="tienda de objetos basico"
+              />
+              <div style="margin-left: 20px">
+                <p>
+                  En este ejemplo se creo un sub directorio con un archivo
+                  adentro
+                </p>
+                <p>Un nuevo objeto del tipo arbol se ha asociado</p>
+              </div>
+            </div>
+          </section>
+          <section data-transition="slide-in fade-out">
+            <div style="display: flex; align-items: center">
+              <img
+                style="width: 50%"
+                src="images/tienda-objetos-basico2.png"
+                alt="tienda de objetos basico"
+              />
+              <div style="margin-left: 20px">
+                <p>
+                  Al mismo tiempo se creo un nuevo commit que está asociado a un
+                  nuevo arbol que representa el nuevo estado del directorio y su
+                  estructura de archivos ya que el contenido ha cambiado
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
