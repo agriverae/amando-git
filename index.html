@@ -41,6 +41,132 @@
               contiene toda la información necesaria para retener y manejar las
               revisiones e historia de un proyecto.
             </p>
+            <p>
+              El proceso de agregar nuevos cambios al repositorio se lograr a
+              través de varias etapas
+            </p>
+          </section>
+          <section>
+            <h3>¿Cómo crear un nuevo repositorio de Git?</h3>
+            <p>
+              Para poder empezar a usar los comandos y funcionalidades
+              especiales de git. Debemos ejecutar el siguiente comando
+            </p>
+            <pre>
+              <code data-trim data-noescape>
+              git init
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>¿Qué etapas podemos encontrar en un repositorio de Git?</h2>
+          </section>
+          <section>
+            <h2>Working Directory</h2>
+            <h5>Estado Inicial o Espacio de trabajo</h5>
+          </section>
+          <section>
+            <h2>Staged</h2>
+            <h5>Estado de preparación o Pre-commit</h5>
+            <pre>
+              <code data-trim data-noescape>
+                <script type="text/template">
+                  git add <archivo>
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Commited</h2>
+            <h5>Entregado o comprometido</h5>
+            <pre>
+              <code data-trim data-noescape>
+              git commit -m "mensaje personalizado"
+              </code>
+            </pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Otros Comandos Basicos</h1>
+          </section>
+          <section>
+            Para ver el estado general del proyecto
+            <pre>
+              <code data-trim data-noescape>
+              git status
+              </code>
+            </pre>
+          </section>
+          <section>
+            Para poder ver los commits previos
+            <pre>
+              <code data-trim data-noescape>
+                git log
+              </code>
+            </pre>
+          </section>
+          <section>
+            Para poder ver información más en detalle de los commits
+            <pre>
+              <code data-trim data-noescape>
+                <script type="text/template">
+                  git show <número_de_commit>
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            Para ver las diferencias entre los commits
+            <pre>
+              <code data-trim data-noescape>
+                <script type="text/template">
+                  git diff <número_de_commit_1> <número_de_commit_2> 
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            Haciendo copias de tu repositorio
+            <pre>
+              <code data-trim data-noescape>
+                <script type="text/template">
+                  git clone <repositorio_a_copiar> <nombre_de_carpeta> 
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            Para poder configurar los commits del autor para todos tus
+            repositorios
+            <pre>
+              <code data-trim data-noescape>
+                git config --global user.name "Jon Loeliger"
+                git config --global user.email "jdl@example.com"
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>
+              Para poder configurar los commits del autor para un repositorio
+            </p>
+            <p>Esto anula o invalida las configurares de --global</p>
+            <pre>
+              <code data-trim data-noescape>
+                git config user.name "Jon Loeliger"
+                git config user.email "jdl@example.com"
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>
+              Para poder remover las configuraciones se usa la opción de --unset
+            </p>
+            <pre>
+              <code data-trim data-noescape>
+                git config --unset --global user.email
+              </code>
+            </pre>
           </section>
         </section>
         <section>
@@ -328,6 +454,21 @@
                   Al mismo tiempo se creo un nuevo commit que está asociado a un
                   nuevo arbol que representa el nuevo estado del directorio y su
                   estructura de archivos ya que el contenido ha cambiado
+                </p>
+              </div>
+            </div>
+          </section>
+          <section data-transition="slide-in fade-out">
+            <div style="display: flex; align-items: center">
+              <img
+                style="width: 50%"
+                src="images/tienda-objetos-basico2.png"
+                alt="tienda de objetos basico"
+              />
+              <div style="margin-left: 20px">
+                <p>
+                  Hay que tener en cuenta la dirección de las flechas entre los
+                  commits. Cada commit apunta a su padre o padres
                 </p>
               </div>
             </div>
